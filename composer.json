@@ -21,7 +21,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "LazyCode404\\laravelwebinstaller\\LaravelInsttallerServiceProvider"
+                "LazyCode404\\laravelwebinstaller\\LaravelInstallerServiceProvider"
             ]
         }
     }
