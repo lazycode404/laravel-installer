@@ -4,6 +4,7 @@ namespace LazyCode404\laravelwebinstaller;
 
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Redirect;
 use LazyCode404\laravelwebinstaller\middleware\SetupMiddleware;
 
 class LaravelInstallerServiceProvider extends ServiceProvider
