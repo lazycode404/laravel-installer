@@ -149,6 +149,7 @@ class SetupController extends Controller
            }
            $setupStage->update(['value' => '4']);
            Configuration::where('config', 'setup_complete')->firstOrFail()->update(['value' => '1']);;
+           Config::set('installer.setup_completed', true);
            return view('vendor.installer.complete');
         }catch(Exception $e){
             return redirect()->back()->withErrors([$e->getMessage()]);

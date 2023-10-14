@@ -8,12 +8,21 @@
             "name": "LazyCode404"
         }
     ],
-    "minimum-stability": "dev",
-    "prefer-stable": true,
     "require": {},
     "autoload": {
         "psr-4": {
             "LazyCode404\\laravelwebinstaller\\": "src/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LazyCode404\\laravelwebinstaller\\LaravelInsttallerServiceProvider"
+            ]
         }
     }
 }

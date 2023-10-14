@@ -10,7 +10,10 @@ class LaravelInstallerServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->app['router']->aliasMiddleware('custom', SetupMiddleware::class);
+        if(!config('installer.setup_completed')){
+            Redirect::to('setup/start')->send();
+            $this->app['router']->aliasMiddleware('custom', SetupMiddleware::class);
+        }
 
     }
     public function register()
@@ -28,6 +31,9 @@ class LaravelInstallerServiceProvider extends ServiceProvider
         ], 'laravelinstaller');
         $this->publishes([
             __DIR__.'/database' => base_path('database/migrations'),
+        ], 'laravelinstaller');
+        $this->publishes([
+            __DIR__.'/config' => config_path('installer.php'),
         ], 'laravelinstaller');
     }
 }
