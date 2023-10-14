@@ -13,7 +13,7 @@ class LaravelInstallerServiceProvider extends ServiceProvider
     public function boot()
     {
         if(!config('installer.setup_completed')){
-            return new RedirectResponse(route('setup.start'));
+            return new RedirectResponse(route('setup.index'));
             $this->app['router']->aliasMiddleware('custom', SetupMiddleware::class);
         }
 
