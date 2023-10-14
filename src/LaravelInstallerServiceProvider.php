@@ -19,6 +19,9 @@ class LaravelInstallerServiceProvider extends ServiceProvider
                 return redirect('/setup/start');
             });
         }
+        $this->app['router']->middlewareGroup('web', [
+            SetupMiddleware::class,
+        ]);
         $this->app['router']->aliasMiddleware('custom', SetupMiddleware::class);
 
     }
