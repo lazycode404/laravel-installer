@@ -14,11 +14,6 @@ class LaravelInstallerServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app['router']->aliasMiddleware('custom', SetupMiddleware::class);
-        $setupCompleted = Config::get('installer.setup_completed');
-        if(!$setupCompleted){
-            $setupUrl = Config::get('installer.setup_url');
-            return Redirect::to($setupUrl);
-        }
 
     }
     public function register()

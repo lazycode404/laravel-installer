@@ -2,9 +2,10 @@
 
 namespace LazyCode404\laravelwebinstaller\middleware;
 
-use Closure;
 use Artisan;
+use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
 
 
 class SetupMiddleware
@@ -22,15 +23,10 @@ class SetupMiddleware
            Artisan::call('key:generate');
            Artisan::call('config:cache');
         }
-        $setupStatus = setupStatus();
-        if($request->is('setup/*')){
-            if($setupStatus){
-                return redirect('/');
-            }
-            return $next($request);
-        }
-        if(!$setupStatus){
-            return redirect()->route('setup.index');
+        $setupCompleted = Config::get('installer.setup_completed');
+        if(!$setupCompleted){
+            $setupUrl = Config::get('installer.setup_url');
+            return Redirect::to($setupUrl);
         }
         return $next($request);
     }
