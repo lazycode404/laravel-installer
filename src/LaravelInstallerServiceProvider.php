@@ -13,6 +13,12 @@ class LaravelInstallerServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        // Check if the installation is complete and redirect if not
+        if (!$this->isInstallationComplete() && !$this->app->runningInConsole()) {
+            $this->app['router']->get('/', function () {
+                return redirect('/setup/start');
+            });
+        }
         $this->app['router']->aliasMiddleware('custom', SetupMiddleware::class);
 
     }
@@ -35,5 +41,10 @@ class LaravelInstallerServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/config' => config_path('installer.php'),
         ], 'laravelinstaller');
+    }
+    private function isInstallationComplete()
+    {
+        // Replace this with your logic to check if the installation is complete.
+        return config('installer.setup_completed', false);
     }
 }
