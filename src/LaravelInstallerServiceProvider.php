@@ -3,6 +3,7 @@
 namespace LazyCode404\laravelwebinstaller;
 
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Redirect;
@@ -13,7 +14,8 @@ class LaravelInstallerServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app['router']->aliasMiddleware('custom', SetupMiddleware::class);
-        if(!config('installer.setup_completed')){
+        $setupCompleted = Config::get('installer.setup_completed');
+        if(!$setupCompleted){
             return Redirect::to('setup/start');
         }
 
