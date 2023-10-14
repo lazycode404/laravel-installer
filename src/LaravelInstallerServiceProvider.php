@@ -16,7 +16,7 @@ class LaravelInstallerServiceProvider extends ServiceProvider
         $this->app['router']->aliasMiddleware('custom', SetupMiddleware::class);
         $setupCompleted = Config::get('installer.setup_completed');
         if(!$setupCompleted){
-            return Redirect::to('setup/start');
+            return Redirect::to($setupUrl);
         }
 
     }
